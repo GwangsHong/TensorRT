@@ -51,16 +51,16 @@ set(PLUGIN_LISTS
     )
 
 # Add BERT sources if ${BERT_GENCODES} was populated
-if(BERT_GENCODES)
-    set(BERT_CU_SOURCES)
-    set(PLUGIN_LISTS
-        ${PLUGIN_LISTS}
-        embLayerNormPlugin
-        fcPlugin
-        geluPlugin
-        bertQKVToContextPlugin
-        skipLayerNormPlugin
-        )
+
+set(BERT_CU_SOURCES)
+set(PLUGIN_LISTS
+    ${PLUGIN_LISTS}
+    embLayerNormPlugin
+    fcPlugin
+    geluPlugin
+    bertQKVToContextPlugin
+    skipLayerNormPlugin
+    )
 endif()
 
 include_directories(common common/kernels ../samples/common)
@@ -76,10 +76,10 @@ add_subdirectory(common)
 # Set gencodes
 set_source_files_properties(${PLUGIN_CU_SOURCES} PROPERTIES COMPILE_FLAGS ${GENCODES})
 list(APPEND PLUGIN_SOURCES "${PLUGIN_CU_SOURCES}")
-if (BERT_CU_SOURCES)
-    set_source_files_properties(${BERT_CU_SOURCES} PROPERTIES COMPILE_FLAGS ${BERT_GENCODES})
-    list(APPEND PLUGIN_SOURCES "${BERT_CU_SOURCES}")
-endif()
+
+set_source_files_properties(${BERT_CU_SOURCES} PROPERTIES COMPILE_FLAGS ${BERT_GENCODES})
+list(APPEND PLUGIN_SOURCES "${BERT_CU_SOURCES}")
+
 
 list(APPEND PLUGIN_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/InferPlugin.cpp")
 list(APPEND PLUGIN_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/../samples/common/logger.cpp")
