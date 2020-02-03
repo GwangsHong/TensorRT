@@ -61,7 +61,7 @@ set(PLUGIN_LISTS
     bertQKVToContextPlugin
     skipLayerNormPlugin
     )
-endif()
+
 
 include_directories(common common/kernels ../samples/common)
 
